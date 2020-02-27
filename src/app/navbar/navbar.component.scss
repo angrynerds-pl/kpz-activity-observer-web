@@ -1,0 +1,10 @@
+div {
+    height: 60px;
+    background-color: rebeccapurple;
+    display: flex;
+    justify-content: center;
+
+    app-navbar-item:nth-child(1) {
+        border-left: 1px solid grey;
+    }
+}

@@ -1,0 +1,4 @@
+<div [ngSwitch]="currentView">
+    <app-single-data-view *ngSwitchCase="'single'"></app-single-data-view>
+    <app-combined-data-view *ngSwitchCase="'combined'"></app-combined-data-view>
+</div>

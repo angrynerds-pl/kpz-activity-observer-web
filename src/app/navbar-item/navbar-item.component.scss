@@ -1,0 +1,20 @@
+:host {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid grey;
+    div {
+        color: gold;
+    }
+}
+
+:host(.active) {
+    border-bottom: 5px solid gold;
+    border-top: 5px solid gold;
+}
+
+:host:hover {
+    border-bottom: 5px solid gold;
+}
+

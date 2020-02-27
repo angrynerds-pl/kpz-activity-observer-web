@@ -1,0 +1,28 @@
+header {
+    height: 10vh;
+    background-color: rebeccapurple;
+    display: flex;
+    align-items: center;
+    color: whitesmoke;
+    font-size: xx-large;   
+    div{
+        margin-left: 50px;
+    }
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    .formContainer {
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid rebeccapurple;
+        border-radius: 20px;
+        form {
+            margin-bottom: 20px;
+        }
+    }
+}
