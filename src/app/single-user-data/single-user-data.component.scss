@@ -1,0 +1,12 @@
+:host {
+    border: 2px solid rebeccapurple;
+    border-radius: 20px;
+    .container {
+        padding: 20px;
+        div {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: large;
+        }
+    }
+}

@@ -7,7 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent  {
 
-  loginIsActive: boolean = true;
+  userListIsActive: boolean = true;
   singleDataIsActive: boolean = false;
   combinedDataIsActive: boolean = false;
   @Output() currentView = new EventEmitter();
@@ -16,19 +16,26 @@ export class NavbarComponent  {
 
   onSingleDataClick() {
     this.singleDataIsActive = true;
-    this.loginIsActive = false;
+    this.userListIsActive = false;
     this.combinedDataIsActive = false;
     this.currentView.emit("single");
   }
 
   onCombinedDataClick() {
     this.singleDataIsActive = false;
-    this.loginIsActive = false;
+    this.userListIsActive = false;
     this.combinedDataIsActive = true;
     this.currentView.emit("combined");
   }
 
   onLogoutClick() {
     this.currentView.emit("logout");
+  }
+
+  onUserListClick() {
+    this.singleDataIsActive = false;
+    this.userListIsActive = true;
+    this.combinedDataIsActive = false;
+    this.currentView.emit("users")
   }
 }

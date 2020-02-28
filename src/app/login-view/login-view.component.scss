@@ -1,9 +1,10 @@
 header {
+    color: orange;
     height: 10vh;
+    min-height: 50px;
     background-color: rebeccapurple;
     display: flex;
     align-items: center;
-    color: whitesmoke;
     font-size: xx-large;   
     div{
         margin-left: 50px;
@@ -11,6 +12,7 @@ header {
 }
 
 .mainContainer {
+    min-height: 350px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +25,9 @@ header {
         border-radius: 20px;
         form {
             margin-bottom: 20px;
+        }
+        .mat-raised-button {
+            color: orange;
         }
     }
 }

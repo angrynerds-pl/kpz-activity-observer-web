@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    justify-content: space-around;
+    height: 90vh;
+    .userList, .userData {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .userList {
+        width: 40vh;
+    }
+}

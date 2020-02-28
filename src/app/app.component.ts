@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'kpz-activity-observer-web';
-  currentView = "combined";
+  currentView = "users";
 
   isLoggedIn: boolean = false;
 

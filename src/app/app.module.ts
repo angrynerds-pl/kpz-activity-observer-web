@@ -15,8 +15,12 @@ import { CombinedDataViewComponent } from './combined-data-view/combined-data-vi
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
-
+import { UserListComponent } from './user-list/user-list.component';
+import { SingleUserDataComponent } from './single-user-data/single-user-data.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { UserListViewComponent } from './user-list-view/user-list-view.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -27,7 +31,10 @@ import {MatButtonModule} from '@angular/material/button';
     MainComponent,
     LoginViewComponent,
     SingleDataViewComponent,
-    CombinedDataViewComponent
+    CombinedDataViewComponent,
+    UserListComponent,
+    SingleUserDataComponent,
+    UserListViewComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +43,10 @@ import {MatButtonModule} from '@angular/material/button';
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatCheckboxModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

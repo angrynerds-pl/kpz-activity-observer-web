@@ -4,17 +4,19 @@
     align-items: center;
     justify-content: center;
     border-right: 1px solid grey;
+    border-left: 1px solid grey;
+
     div {
-        color: gold;
+        color: orange;
     }
 }
 
 :host(.active) {
-    border-bottom: 5px solid gold;
-    border-top: 5px solid gold;
+    border-bottom: 5px solid orange;
+    border-top: 5px solid orange;
 }
 
 :host:hover {
-    border-bottom: 5px solid gold;
+    border-bottom: 5px solid orange;
 }
 

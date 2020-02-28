@@ -1,5 +1,6 @@
 <div>
-    <app-navbar-item (click)="onLogoutClick()">Logout</app-navbar-item>
     <app-navbar-item (click)="onCombinedDataClick()" [class.active]="combinedDataIsActive">Combined User Data</app-navbar-item>
     <app-navbar-item (click)="onSingleDataClick()" [class.active]="singleDataIsActive">Single User Data</app-navbar-item>
+    <app-navbar-item (click)="onUserListClick()" [class.active]="userListIsActive">User List</app-navbar-item>
+    <app-navbar-item (click)="onLogoutClick()">Logout</app-navbar-item>
 </div>
