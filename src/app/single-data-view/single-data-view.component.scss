@@ -1,6 +1,7 @@
 :host {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     height: 90vh;
     .userList, .userData {
         display: flex;

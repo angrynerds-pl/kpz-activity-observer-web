@@ -21,7 +21,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UserListViewComponent } from './user-list-view/user-list-view.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { UserAccountDetailsComponent } from './user-account-details/user-account-details.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     CombinedDataViewComponent,
     UserListComponent,
     SingleUserDataComponent,
-    UserListViewComponent
+    UserListViewComponent,
+    UserAccountDetailsComponent
   ],
   imports: [
     BrowserModule,
