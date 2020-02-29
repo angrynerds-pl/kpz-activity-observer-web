@@ -12,7 +12,7 @@ export class UserAccountDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  name = "Monica";
-  surname = "Belucci";
-  email = "mobe@gmail.com";
+  name = "Mike";
+  surname = "Tyson";
+  email = "mity@gmail.com";
 }

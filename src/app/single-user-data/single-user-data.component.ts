@@ -14,11 +14,9 @@ export class SingleUserDataComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  title = 'Angular Charts';
 
   view: any[] = [600, 400];
 
-  // options for the chart
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -32,26 +30,23 @@ export class SingleUserDataComponent implements OnInit {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50']
   };
 
-  //pie
   showLabels = true;
-
-  // data goes here
-public single = [
-  {
-    "name": "Youtube",
-    "value": 120
-  },
-  {
-    "name": "Gmail",
-    "value": 30
-  },
-  {
-    "name": "9gag",
-    "value": 50
-  },
-  {
-    "name": "CNN",
-    "value": 15
-  }
-];
+  single = [
+    {
+      "name": "Youtube",
+      "value": 120
+    },
+    {
+      "name": "Gmail",
+      "value": 30
+    },
+    {
+      "name": "9gag",
+      "value": 50
+    },
+    {
+      "name": "CNN",
+      "value": 15
+    }
+  ];
 }

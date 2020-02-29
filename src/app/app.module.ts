@@ -12,13 +12,13 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { SingleDataViewComponent } from './single-data-view/single-data-view.component';
 import { CombinedDataViewComponent } from './combined-data-view/combined-data-view.component';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { UserListComponent } from './user-list/user-list.component';
 import { SingleUserDataComponent } from './single-user-data/single-user-data.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserListViewComponent } from './user-list-view/user-list-view.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserAccountDetailsComponent } from './user-account-details/user-account-details.component';
