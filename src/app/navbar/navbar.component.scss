@@ -1,0 +1,19 @@
+div {
+    height: 60px;
+    background-color: rebeccapurple;
+    display: flex;
+    overflow: auto;
+
+    app-navbar-item:first-of-type {
+        margin-left: 25px;
+    }
+
+    app-navbar-item:last-of-type {
+        margin-left: auto;
+        margin-right: 25px;
+    }
+
+    app-navbar-item:nth-child(1) {
+        border-left: 1px solid grey;
+    }
+}

@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'kpz-activity-observer-web';
+  currentView = "users";
+
+  isLoggedIn: boolean = false;
+
+  viewChanged($event) {
+    if($event==='logout') this.isLoggedIn = false;
+    this.currentView = $event;
+  }
+
+  logIn(){
+    this.isLoggedIn = true;
+  }
 }
