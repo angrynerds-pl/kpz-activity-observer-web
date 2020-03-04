@@ -5,16 +5,15 @@
 </header>
 <div class="mainContainer">
     <div class="formContainer">
-        <form>
+        <div class="errorBox" *ngIf="loginError">Invalid email and/or password</div>
+        <form onsubmit="onLogInClicked()">
             <mat-form-field>
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Ex. pat@example.com" required>
+              <input (keyup)="setEmail($event)" matInput placeholder="Ex. pat@example.com" required>
             </mat-form-field>
-        </form>
-        <form>
             <mat-form-field>
               <mat-label>Password</mat-label>
-              <input matInput type="password" required>
+              <input (keyup)="setPassword($event)" class="password" matInput type="password" required>
             </mat-form-field>
         </form>
         <button (click)="onLogInClicked()"  mat-raised-button color="primary">Sign in</button>

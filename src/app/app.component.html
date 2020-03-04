@@ -1,8 +1,2 @@
-<div *ngIf="!isLoggedIn; else notLoggedIn">
-    <app-login-view (logIn)="logIn()"></app-login-view>
-</div>
-<ng-template #notLoggedIn>
-    <app-navbar (currentView)="viewChanged($event)"></app-navbar>
-    <app-main [currentView] = "currentView"></app-main>
-</ng-template>
+<router-outlet></router-outlet>
 
