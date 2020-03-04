@@ -5,7 +5,7 @@
 </header>
 <div class="mainContainer">
     <div class="formContainer">
-        <div class="errorBox" *ngIf="loginError">Invalid email and/or password</div>
+        <div class="errorBox" *ngIf="loginError">{{errorMessage}}</div>
         <form onsubmit="onLogInClicked()">
             <mat-form-field>
               <mat-label>Email</mat-label>
@@ -15,6 +15,7 @@
               <mat-label>Password</mat-label>
               <input (keyup)="setPassword($event)" class="password" matInput type="password" required>
             </mat-form-field>
+            <mat-slide-toggle (change)="rememberMe()" color="primary">Remember me!</mat-slide-toggle>
         </form>
         <button (click)="onLogInClicked()"  mat-raised-button color="primary">Sign in</button>
     </div>

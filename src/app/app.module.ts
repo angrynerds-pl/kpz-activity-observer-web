@@ -23,6 +23,7 @@ import { UserListViewComponent } from './user-list-view/user-list-view.component
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserAccountDetailsComponent } from './user-account-details/user-account-details.component';
 import {HttpClientModule} from '@angular/common/http';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatTableModule,
     MatCheckboxModule,
     NgxChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

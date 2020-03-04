@@ -5,13 +5,14 @@ import { SingleDataViewComponent } from './single-data-view/single-data-view.com
 import { UserListViewComponent } from './user-list-view/user-list-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { MainComponent } from './main/main.component';
+import { AuthGuard } from './auth-guard.service';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginViewComponent},
   { 
     path: 'main', 
-    component: MainComponent,
+    component: MainComponent, canActivate: [AuthGuard],
       children: [
         { path: 'combined', component: CombinedDataViewComponent},
         { path: 'single', component: SingleDataViewComponent},
