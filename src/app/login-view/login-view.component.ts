@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginViewComponent implements OnInit {
   ngOnInit(): void {
-    if(localStorage.getItem('token')) {
+    if(localStorage.getItem('token') || sessionStorage.getItem('token')) {
       this.router.navigate(['/main/users']);
     }
   }
@@ -47,7 +47,11 @@ export class LoginViewComponent implements OnInit {
           this.router.navigate(['/main/users']);
         },
         err => {
-          this.errorMessage = 'Invalid email and/or password';
+          if(err.status==404) {
+            this.errorMessage = 'Server unreachable. Please try again later.';
+          } else {
+            this.errorMessage = 'Invalid email and/or password';
+          }
           this.loginError = true;
         }
       );
