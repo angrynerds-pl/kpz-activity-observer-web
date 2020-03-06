@@ -22,6 +22,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { UserListViewComponent } from './user-list-view/user-list-view.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserAccountDetailsComponent } from './user-account-details/user-account-details.component';
+import {HttpClientModule} from '@angular/common/http';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { UserAccountDetailsComponent } from './user-account-details/user-account
     MatButtonModule,
     MatTableModule,
     MatCheckboxModule,
-    NgxChartsModule
+    NgxChartsModule,
+    HttpClientModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

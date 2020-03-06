@@ -25,7 +25,20 @@ header {
         border-radius: 20px;
         form {
             margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
         }
+
+        .errorBox {
+            text-align: center;
+            color: darkred;
+            border: 1px solid darkred;
+            background-color: lightpink;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
         .mat-raised-button {
             color: orange;
         }
