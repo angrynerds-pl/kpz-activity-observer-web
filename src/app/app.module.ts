@@ -24,6 +24,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserAccountDetailsComponent } from './user-account-details/user-account-details.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatCheckboxModule,
     NgxChartsModule,
     HttpClientModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

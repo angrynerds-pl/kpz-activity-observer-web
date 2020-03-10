@@ -1,19 +1,28 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface User {
+  number: number;
   name: string;
   surname: string;
 }
 
 const users: User[] = [
-  {name: 'Mike', surname: 'Tyson'},
-  {name: 'Joe', surname: 'Pesci'},
-  {name: 'Anna', surname: 'Kendrick'},
-  {name: 'Jordan', surname: 'Belfort'},
-  {name: 'Monica', surname: 'Belluci'},
-  {name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'}
+  {number: 1,name: 'Mike', surname: 'Tyson'},
+  {number: 2,name: 'Joe', surname: 'Pesci'},
+  {number: 3,name: 'Anna', surname: 'Kendrick'},
+  {number: 4,name: 'Jordan', surname: 'Belfort'},
+  {number: 5,name: 'Monica', surname: 'Belluci'},
+  {number: 6,name: 'Monica', surname: 'Belluci'},
+  {number: 7,name: 'Monica', surname: 'Belluci'},
+  {number: 8,name: 'Monica', surname: 'Belluci'},
+  {number: 9,name: 'Monica', surname: 'Belluci'},
+  {number: 10,name: 'Monica', surname: 'Belluci'},
+  {number: 11,name: 'Monica', surname: 'Belluci'},
+  {number: 12,name: 'Monica', surname: 'Belluci'},
+  {number: 13,name: 'Monica', surname: 'Belluci'}
 ];
 
 @Component({
@@ -31,10 +40,13 @@ export class UserListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
-  displayedColumns: string[] = ['name', 'surname', 'checkbox'];
+  displayedColumns: string[] = ['number','name', 'surname', 'checkbox'];
   dataSource = new MatTableDataSource(users);
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
