@@ -31,6 +31,15 @@ export class AuthService {
     return !jwt.isTokenExpired(token);
   }
 
+  getToken() {
+    let token = localStorage.getItem('token');
+    if(!token) {
+      token = sessionStorage.getItem('token');
+      if(!token) return null;
+    }
+    return token;
+  }
+
   logout() {
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');

@@ -2,28 +2,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
+import { UsersService } from '../users.service';
 
 export interface User {
   number: number;
+  admin: string;
+  id: string;
   name: string;
   surname: string;
+  email: string;
+  password: string;
 }
-
-const users: User[] = [
-  {number: 1,name: 'Mike', surname: 'Tyson'},
-  {number: 2,name: 'Joe', surname: 'Pesci'},
-  {number: 3,name: 'Anna', surname: 'Kendrick'},
-  {number: 4,name: 'Jordan', surname: 'Belfort'},
-  {number: 5,name: 'Monica', surname: 'Belluci'},
-  {number: 6,name: 'Monica', surname: 'Belluci'},
-  {number: 7,name: 'Monica', surname: 'Belluci'},
-  {number: 8,name: 'Monica', surname: 'Belluci'},
-  {number: 9,name: 'Monica', surname: 'Belluci'},
-  {number: 10,name: 'Monica', surname: 'Belluci'},
-  {number: 11,name: 'Monica', surname: 'Belluci'},
-  {number: 12,name: 'Monica', surname: 'Belluci'},
-  {number: 13,name: 'Monica', surname: 'Belluci'}
-];
 
 @Component({
   selector: 'app-user-list',
@@ -35,16 +24,33 @@ export class UserListComponent implements OnInit {
   initialSelection = [];
   allowMultiSelect = false;
   selection = new SelectionModel<User>(this.allowMultiSelect, this.initialSelection);
+  data: User[] = [];
 
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+  constructor(private userService: UsersService) { 
+    
   }
 
-  displayedColumns: string[] = ['number','name', 'surname', 'checkbox'];
-  dataSource = new MatTableDataSource(users);
+  ngOnInit(): void {
+    this.userService.getUsers()
+      .subscribe(res=>{
+        res.data.forEach((element,index) => {
+          element.number = index+1;
+          this.data.push(element);
+        });
+        this.dataSource.paginator = this.paginator;
+      },
+      err=> {
+        console.log(err);
+      });
+    
+  }
+
+  displayedColumns: string[] = ['number','name', 'surname','email', 'checkbox'];
+  dataSource = new MatTableDataSource(this.data);
+
+  log() {
+    console.log(this.selection.selected[0]);
+  }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
