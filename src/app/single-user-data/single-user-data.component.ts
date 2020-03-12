@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { User } from '../user-list/user-list.component';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-single-user-data',
@@ -8,23 +9,39 @@ import { User } from '../user-list/user-list.component';
 })
 export class SingleUserDataComponent implements OnInit {
 
+  constructor(private userService: UsersService) { }
+
+  ngOnInit(): void {
+  }
+
   name;
   surname;
   
+  lol = [];
+
   @Input() selectedUser: User;
   
   ngOnChanges(changes: SimpleChanges) {
     if(changes.selectedUser.currentValue!=null){
-      let user:User = changes.selectedUser.currentValue;
+      const user:User = changes.selectedUser.currentValue;
       this.name = user.name;
       this.surname = user.surname;
-      
+      this.userService.getSingleUserData(user._id)
+        .subscribe(res =>{
+          this.updateGraphs(res.data);
+        },
+        err => {
+          console.log(err);
+        });
     }
   }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  private updateGraphs(data) {
+    const temp = [];
+    data.forEach(element => {
+      temp.push({'name': `${element.url}`,'value':element.timestamps.length});
+    });
+    this.lol = temp;
   }
 
   view: any[] = [600, 400];
@@ -43,22 +60,5 @@ export class SingleUserDataComponent implements OnInit {
   };
 
   showLabels = true;
-  single = [
-    {
-      "name": "Youtube",
-      "value": 120
-    },
-    {
-      "name": "Gmail",
-      "value": 30
-    },
-    {
-      "name": "9gag",
-      "value": 50
-    },
-    {
-      "name": "CNN",
-      "value": 15
-    }
-  ];
+  
 }

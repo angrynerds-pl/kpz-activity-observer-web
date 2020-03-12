@@ -3,7 +3,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersService } from '../users.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface User {
   number: number;
