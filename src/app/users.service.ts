@@ -20,4 +20,13 @@ export class UsersService {
     }
     return this.http.get(`${this.url}/users?limit=${limit}&page=${page}`, opts);
   }
+
+  getSingleUserData(id):Observable<any> {
+    const opts = {
+      headers: new HttpHeaders({
+        'x-auth-token': `${this.auth.getToken()}`
+      })
+    }
+    return this.http.get(`${this.path}/sites/${id}`,opts);
+  }
 }
