@@ -8,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class SingleDataViewComponent implements OnInit {
 
   constructor() { }
+  selectedUser;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  select($event) {
+    this.selectedUser = $event;
   }
 
 }

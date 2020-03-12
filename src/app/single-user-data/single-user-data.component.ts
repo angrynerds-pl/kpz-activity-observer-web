@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { User } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-single-user-data',
@@ -7,8 +8,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SingleUserDataComponent implements OnInit {
 
-  name = 'Name';
-  surname = 'Surname';
+  name;
+  surname;
+  
+  @Input() selectedUser: User;
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.selectedUser.currentValue!=null){
+      let user:User = changes.selectedUser.currentValue;
+      this.name = user.name;
+      this.surname = user.surname;
+      
+    }
+  }
 
   constructor() { }
 

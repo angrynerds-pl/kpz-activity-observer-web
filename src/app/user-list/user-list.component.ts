@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersService } from '../users.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface User {
   number: number;
   admin: string;
-  id: string;
+  _id: string;
   name: string;
   surname: string;
   email: string;
@@ -25,10 +26,9 @@ export class UserListComponent implements OnInit {
   allowMultiSelect = false;
   selection = new SelectionModel<User>(this.allowMultiSelect, this.initialSelection);
   data: User[] = [];
+  @Output() selectedUser = new EventEmitter();
 
-  constructor(private userService: UsersService) { 
-    
-  }
+  constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
     this.userService.getUsers()
@@ -42,15 +42,15 @@ export class UserListComponent implements OnInit {
       err=> {
         console.log(err);
       });
-    
+  }
+
+  userChanged() {
+    this.selectedUser.emit(this.selection.selected[0]);
   }
 
   displayedColumns: string[] = ['number','name', 'surname','email', 'checkbox'];
   dataSource = new MatTableDataSource(this.data);
 
-  log() {
-    console.log(this.selection.selected[0]);
-  }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
