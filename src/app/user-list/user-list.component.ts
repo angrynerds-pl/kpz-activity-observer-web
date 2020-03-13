@@ -3,7 +3,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersService } from '../users.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface User {
   number: number;
@@ -27,21 +26,46 @@ export class UserListComponent implements OnInit {
   selection = new SelectionModel<User>(this.allowMultiSelect, this.initialSelection);
   data: User[] = [];
   @Output() selectedUser = new EventEmitter();
+  
 
   constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
-    this.userService.getUsers()
+    this.userService.getUsers(5,1)
       .subscribe(res=>{
-        res.data.forEach((element,index) => {
+        console.log(res);
+        res.data.docs.forEach((element,index) => {
           element.number = index+1;
           this.data.push(element);
         });
+        const emptyUser: User = {number: 0,admin:'null',_id:'null',name:'null',surname:'null',email:'null',password:'null'};
+        for(let i=0;i<res.data.total-res.data.limit;i++) {
+          this.data.push(emptyUser);
+        }
         this.dataSource.paginator = this.paginator;
       },
       err=> {
         console.log(err);
       });
+  }
+
+
+  paginatorChanged($event) {
+    let i=($event.pageIndex*$event.pageSize);
+    if(this.data[i].number) return;
+    this.userService.getUsers($event.pageSize,$event.pageIndex+1)
+      .subscribe(res=>{
+        for(let j=0;i<($event.pageIndex*$event.pageSize)+$event.pageSize;i++,j++){
+          if(res.data.docs[j]){
+            res.data.docs[j].number = i+1;
+            this.data[i] = res.data.docs[j];
+          }
+        }
+        this.dataSource.paginator = this.paginator;
+      },
+      err=> {
+        console.log(err);
+      });  
   }
 
   userChanged() {
@@ -51,8 +75,7 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['number','name', 'surname','email', 'checkbox'];
   dataSource = new MatTableDataSource(this.data);
 
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

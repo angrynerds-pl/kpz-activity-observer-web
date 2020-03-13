@@ -10,12 +10,14 @@ export class UsersService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  getUsers():Observable<any> {
+  url = 'https://activity-observer.herokuapp.com/api';
+
+  getUsers(limit,page):Observable<any> {
     const opts = {
       headers: new HttpHeaders({
         'x-auth-token': `${this.auth.getToken()}`
       })
     }
-    return this.http.get('https://activity-observer.herokuapp.com/api/users', opts);
+    return this.http.get(`${this.url}/users?limit=${limit}&page=${page}`, opts);
   }
 }
