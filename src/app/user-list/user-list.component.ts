@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersService } from '../users.service';
+import { element } from 'protractor';
 
 export interface User {
   number: number;
@@ -21,10 +22,12 @@ export interface User {
 })
 export class UserListComponent implements OnInit {
 
+  length = 0;
   initialSelection = [];
   allowMultiSelect = false;
   selection = new SelectionModel<User>(this.allowMultiSelect, this.initialSelection);
   data: User[] = [];
+  dataSource;
   @Output() selectedUser = new EventEmitter();
   
 
@@ -33,39 +36,32 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers(5,1)
       .subscribe(res=>{
-        console.log(res);
-        res.data.docs.forEach((element,index) => {
-          element.number = index+1;
-          this.data.push(element);
-        });
-        const emptyUser: User = {number: 0,admin:'null',_id:'null',name:'null',surname:'null',email:'null',password:'null'};
-        for(let i=0;i<res.data.total-res.data.limit;i++) {
-          this.data.push(emptyUser);
-        }
-        this.dataSource.paginator = this.paginator;
-      },
-      err=> {
-        console.log(err);
+          res.data.docs.forEach((element,index) => {
+            element.number = index+1;
+            this.data.push(element);
+          });
+          this.length = res.data.total;
+          this.dataSource = new MatTableDataSource(this.data);
+        },
+          err=> {
+            console.log(err);
       });
   }
 
 
   paginatorChanged($event) {
-    let i=($event.pageIndex*$event.pageSize);
-    if(this.data[i].number) return;
     this.userService.getUsers($event.pageSize,$event.pageIndex+1)
       .subscribe(res=>{
-        for(let j=0;i<($event.pageIndex*$event.pageSize)+$event.pageSize;i++,j++){
-          if(res.data.docs[j]){
-            res.data.docs[j].number = i+1;
-            this.data[i] = res.data.docs[j];
-          }
-        }
-        this.dataSource.paginator = this.paginator;
-      },
-      err=> {
-        console.log(err);
-      });  
+          this.data.length = 0;
+          res.data.docs.forEach((element,index) => {
+            element.number = ($event.pageIndex*$event.pageSize)+index+1;
+            this.data.push(element);
+          });
+          this.dataSource = new MatTableDataSource(this.data);
+        },
+        err => {
+          console.log(err);
+      })
   }
 
   userChanged() {
@@ -73,9 +69,6 @@ export class UserListComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['number','name', 'surname','email', 'checkbox'];
-  dataSource = new MatTableDataSource(this.data);
-
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
