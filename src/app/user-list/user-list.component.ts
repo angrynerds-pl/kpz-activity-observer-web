@@ -1,20 +1,19 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { UsersService } from '../users.service';
+import { element } from 'protractor';
 
 export interface User {
+  number: number;
+  admin: string;
+  _id: string;
   name: string;
   surname: string;
+  email: string;
+  password: string;
 }
-
-const users: User[] = [
-  {name: 'Mike', surname: 'Tyson'},
-  {name: 'Joe', surname: 'Pesci'},
-  {name: 'Anna', surname: 'Kendrick'},
-  {name: 'Jordan', surname: 'Belfort'},
-  {name: 'Monica', surname: 'Belluci'},
-  {name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'},{name: 'Monica', surname: 'Belluci'}
-];
 
 @Component({
   selector: 'app-user-list',
@@ -23,18 +22,53 @@ const users: User[] = [
 })
 export class UserListComponent implements OnInit {
 
+  length = 0;
   initialSelection = [];
   allowMultiSelect = false;
   selection = new SelectionModel<User>(this.allowMultiSelect, this.initialSelection);
+  data: User[] = [];
+  dataSource;
+  @Output() selectedUser = new EventEmitter();
+  
 
-
-  constructor() { }
+  constructor(private userService: UsersService) {}
 
   ngOnInit(): void {
+    this.userService.getUsers(5,1)
+      .subscribe(res=>{
+          res.data.docs.forEach((element,index) => {
+            element.number = index+1;
+            this.data.push(element);
+          });
+          this.length = res.data.total;
+          this.dataSource = new MatTableDataSource(this.data);
+        },
+          err=> {
+            console.log(err);
+      });
   }
 
-  displayedColumns: string[] = ['name', 'surname', 'checkbox'];
-  dataSource = new MatTableDataSource(users);
+
+  paginatorChanged($event) {
+    this.userService.getUsers($event.pageSize,$event.pageIndex+1)
+      .subscribe(res=>{
+          this.data.length = 0;
+          res.data.docs.forEach((element,index) => {
+            element.number = ($event.pageIndex*$event.pageSize)+index+1;
+            this.data.push(element);
+          });
+          this.dataSource = new MatTableDataSource(this.data);
+        },
+        err => {
+          console.log(err);
+      })
+  }
+
+  userChanged() {
+    this.selectedUser.emit(this.selection.selected[0]);
+  }
+
+  displayedColumns: string[] = ['number','name', 'surname','email', 'checkbox'];
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

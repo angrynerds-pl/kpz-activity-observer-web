@@ -1,8 +1,8 @@
 <div class="userList">
-    <app-user-list></app-user-list>
+    <app-user-list (selectedUser)="select($event)"></app-user-list>
 </div>
 <div class="userData">
-    <app-single-user-data></app-single-user-data>
+    <app-single-user-data [selectedUser]="selectedUser"></app-single-user-data>
 </div>
 
 
