@@ -10,7 +10,6 @@ export class UsersService {
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-<<<<<<< HEAD
   url = 'https://activity-observer.herokuapp.com/api';
 
   getUsers(limit,page):Observable<any> {
@@ -23,29 +22,11 @@ export class UsersService {
   }
 
   getSingleUserData(id):Observable<any> {
-=======
-  path = 'https://activity-observer.herokuapp.com/api';
-
-  getUsers():Observable<any> {
->>>>>>> singleUserData
     const opts = {
       headers: new HttpHeaders({
         'x-auth-token': `${this.auth.getToken()}`
       })
     }
-<<<<<<< HEAD
     return this.http.get(`${this.url}/sites/${id}`,opts);
-=======
-    return this.http.get(`${this.path}/users`, opts);
-  }
-
-  getSingleUserData(id):Observable<any> {
-    const opts = {
-      headers: new HttpHeaders({
-        'x-auth-token': `${this.auth.getToken()}`
-      })
-    }
-    return this.http.get(`${this.path}/sites/${id}`,opts);
->>>>>>> singleUserData
   }
 }
