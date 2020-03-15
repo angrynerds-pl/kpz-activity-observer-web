@@ -27,6 +27,6 @@ export class UsersService {
         'x-auth-token': `${this.auth.getToken()}`
       })
     }
-    return this.http.get(`${this.path}/sites/${id}`,opts);
+    return this.http.get(`${this.url}/sites/${id}`,opts);
   }
 }
