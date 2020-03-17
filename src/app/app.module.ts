@@ -25,6 +25,7 @@ import { UserAccountDetailsComponent } from './user-account-details/user-account
 import {HttpClientModule} from '@angular/common/http';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { VisitCounterComponent } from './charts/visit-counter/visit-counter.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     UserListComponent,
     SingleUserDataComponent,
     UserListViewComponent,
-    UserAccountDetailsComponent
+    UserAccountDetailsComponent,
+    VisitCounterComponent
   ],
   imports: [
     BrowserModule,
