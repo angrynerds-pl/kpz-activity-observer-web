@@ -7,17 +7,17 @@
     <div class="formContainer">
         <div class="errorBox" *ngIf="loginError">{{errorMessage}}</div>
         <form onsubmit="onLogInClicked()">
-            <mat-form-field>
+            <mat-form-field color="accent" appearance="outline">
               <mat-label>Email</mat-label>
               <input (keyup)="setEmail($event)" matInput placeholder="Ex. pat@example.com" required>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field color="accent" appearance="outline">
               <mat-label>Password</mat-label>
               <input (keyup)="setPassword($event)" class="password" matInput type="password" required>
             </mat-form-field>
-            <mat-slide-toggle (change)="rememberMe()" color="primary">Remember me!</mat-slide-toggle>
+            <mat-slide-toggle (change)="rememberMe()" color="accent">Remember me!</mat-slide-toggle>
         </form>
-        <button (click)="onLogInClicked()"  mat-raised-button color="primary">Sign in</button>
+        <button (click)="onLogInClicked()"  mat-raised-button color="accent">Sign in</button>
     </div>
 </div>
 
