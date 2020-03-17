@@ -43,22 +43,4 @@ export class SingleUserDataComponent implements OnInit {
     });
     this.visitCounter = temp;
   }
-
-  view: any[] = [600, 400];
-
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Website';
-  showYAxisLabel = true;
-  yAxisLabel = 'Visits';
-
-  colorScheme = {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50']
-  };
-
-  showLabels = true;
-  
 }
