@@ -1,19 +1,19 @@
+@import "../../assets/scss/variables";
+
 div {
     height: 60px;
-    background-color: rebeccapurple;
+    background-color: mat-color($color-accent, 500);
     display: flex;
     overflow: auto;
 
     app-navbar-item:first-of-type {
         margin-left: 25px;
+        border-left: 1px solid mat-color($color-primary,500);
     }
 
     app-navbar-item:last-of-type {
         margin-left: auto;
         margin-right: 25px;
-    }
-
-    app-navbar-item:nth-child(1) {
-        border-left: 1px solid grey;
+        border-left: 1px solid mat-color($color-primary,500);
     }
 }
