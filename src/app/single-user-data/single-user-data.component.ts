@@ -17,7 +17,7 @@ export class SingleUserDataComponent implements OnInit {
   name;
   surname;
   
-  lol = [];
+  visitCounter = [];
 
   @Input() selectedUser: User;
   
@@ -41,7 +41,7 @@ export class SingleUserDataComponent implements OnInit {
     data.forEach(element => {
       temp.push({'name': `${element.url}`,'value':element.timestamps.length});
     });
-    this.lol = temp;
+    this.visitCounter = temp;
   }
 
   view: any[] = [600, 400];
