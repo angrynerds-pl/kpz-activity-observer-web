@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { User } from '../user-list/user-list.component';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-single-user-data',
@@ -8,57 +9,38 @@ import { User } from '../user-list/user-list.component';
 })
 export class SingleUserDataComponent implements OnInit {
 
-  name;
-  surname;
-  
-  @Input() selectedUser: User;
-  
-  ngOnChanges(changes: SimpleChanges) {
-    if(changes.selectedUser.currentValue!=null){
-      let user:User = changes.selectedUser.currentValue;
-      this.name = user.name;
-      this.surname = user.surname;
-      
-    }
-  }
-
-  constructor() { }
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
   }
 
-  view: any[] = [600, 400];
+  name;
+  surname;
+  
+  visitCounter = [];
 
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Website';
-  showYAxisLabel = true;
-  yAxisLabel = 'Visits';
-
-  colorScheme = {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50']
-  };
-
-  showLabels = true;
-  single = [
-    {
-      "name": "Youtube",
-      "value": 120
-    },
-    {
-      "name": "Gmail",
-      "value": 30
-    },
-    {
-      "name": "9gag",
-      "value": 50
-    },
-    {
-      "name": "CNN",
-      "value": 15
+  @Input() selectedUser: User;
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.selectedUser.currentValue!=null){
+      const user:User = changes.selectedUser.currentValue;
+      this.name = user.name;
+      this.surname = user.surname;
+      this.userService.getSingleUserData(user._id)
+        .subscribe(res =>{
+          this.updateGraphs(res.data);
+        },
+        err => {
+          console.log(err);
+        });
     }
-  ];
+  }
+
+  private updateGraphs(data) {
+    const temp = [];
+    data.forEach(element => {
+      temp.push({'name': `${element.url}`,'value':element.timestamps.length});
+    });
+    this.visitCounter = temp;
+  }
 }

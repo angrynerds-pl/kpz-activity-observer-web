@@ -1,22 +1,22 @@
+@import "../../assets/scss/variables";
+
 :host {
     width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid grey;
-    border-left: 1px solid grey;
-
+    border-right: 1px solid mat-color($color-primary,500);
     div {
-        color: orange;
+        color: $color-text;
     }
 }
 
 :host(.active) {
-    border-bottom: 5px solid orange;
-    border-top: 5px solid orange;
+    border-bottom: 5px solid $color-text;
+    border-top: 5px solid $color-text;
 }
 
 :host:hover {
-    border-bottom: 5px solid orange;
+    border-bottom: 5px solid $color-text;
 }
 

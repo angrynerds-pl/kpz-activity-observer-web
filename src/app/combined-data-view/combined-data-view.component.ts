@@ -50,6 +50,22 @@ export class CombinedDataViewComponent implements OnInit {
     {
       "name": "CNN",
       "value": 15
+    },
+    {
+      "name": "CN",
+      "value": 15
+    },
+    {
+      "name": "NN",
+      "value": 15
+    },
+    {
+      "name": "C",
+      "value": 15
+    },
+    {
+      "name": "CNNn",
+      "value": 15
     }
   ];
 }

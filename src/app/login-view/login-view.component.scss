@@ -1,8 +1,10 @@
+@import "../../assets/scss/variables";
+
 header {
-    color: orange;
+    color: $color-text;
     height: 10vh;
     min-height: 50px;
-    background-color: rebeccapurple;
+    background-color: mat-color($color-accent, 500);
     display: flex;
     align-items: center;
     font-size: xx-large;   
@@ -21,7 +23,7 @@ header {
         padding: 50px;
         display: flex;
         flex-direction: column;
-        border: 2px solid rebeccapurple;
+        border: 2px solid mat-color($color-accent, 500);
         border-radius: 20px;
         form {
             margin-bottom: 20px;
@@ -31,16 +33,17 @@ header {
 
         .errorBox {
             text-align: center;
-            color: darkred;
-            border: 1px solid darkred;
-            background-color: lightpink;
+            font-weight: bolder;
+            color: $color-danger;
+            border: 1px solid $color-danger;
+            background-color: $color-warning;
             border-radius: 5px;
             margin-bottom: 15px;
             padding: 10px;
         }
 
         .mat-raised-button {
-            color: orange;
+            color: $color-text;
         }
     }
 }
