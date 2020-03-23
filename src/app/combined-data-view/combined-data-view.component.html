@@ -1,13 +1,13 @@
 <div class="container">
-    <div class="gaugeChart">
+    <!-- <div class="gaugeChart">
         <ngx-charts-linear-gauge
         [view]="view"
         [scheme]="colorScheme"
         [value]="value"
         [units]="units">
       </ngx-charts-linear-gauge>
-    </div>
-    <div class="pieChart">
+    </div> -->
+    <!-- <div class="pieChart">
         <h1>Title</h1>
         <ngx-charts-pie-chart
             [view]="view"
@@ -20,22 +20,6 @@
             [doughnut]="isDoughnut"
             >
         </ngx-charts-pie-chart>
-    </div>
-    <div class="barChart">
-        <h1>Title</h1>
-        <ngx-charts-bar-vertical
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="data"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [legendPosition]="legendPosition">
-    </ngx-charts-bar-vertical>
-    </div>
+    </div> -->
+    <app-visit-counter [data]="visitCounter"></app-visit-counter>
 </div>

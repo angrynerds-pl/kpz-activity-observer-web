@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-visit-counter',
@@ -11,9 +11,26 @@ export class VisitCounterComponent implements OnInit {
   @Input('data') data;
   @Input('name') name;
   @Input('surname') surname;
+  output;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.hasOwnProperty('data')) {
+      if(changes.data.currentValue != null) {
+        if(Array.isArray(changes.data.currentValue)) {
+          this.output = this.data;
+        } else {
+          const temp = [];
+          changes.data.currentValue.data.forEach(ele => {
+            temp.push({'name':ele.url, 'value':ele.occurences.length});
+          })
+          this.output = temp;
+        }
+      }
+    }
   }
+
   view: any[] = [600, 400];
 
   showXAxis = true;
