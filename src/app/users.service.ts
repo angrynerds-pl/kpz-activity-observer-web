@@ -30,7 +30,11 @@ export class UsersService {
     return this.http.get(`${this.url}/sites/${id}`,opts);
   }
 
-  getAllUsers():Observable<any> {
+  getNumberOfUsers():Observable<any> {
+    return this.getUsers(0,0);
+  }
+
+  getAllSites():Observable<any> {
     const opts = {
       headers: new HttpHeaders({
         'x-auth-token': `${this.auth.getToken()}`

@@ -1,0 +1,21 @@
+@import '../../../assets/scss/variables';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid mat-color($color-accent, 500);
+    width: 200px;
+    height: 200px;
+    justify-content: space-around;
+    border-radius: 20px;
+
+    div:first-of-type {
+        font-size: 7em;
+        line-height: 100px;
+    }
+    div {
+        text-align: center;
+        font-size: 2em;
+        line-height: 40px;
+    }
+}

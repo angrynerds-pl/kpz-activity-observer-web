@@ -1,18 +1,11 @@
-@import "../../assets/scss/variables";
-
 .container {
+    padding: 40px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    align-items: center;
 
-    div {
-        border: 2px solid mat-color($color-accent,500);
-        border-radius: 20px;
-        padding: 30px;
-        margin: 25px;
-
-        h1{
-            text-align: center;
-        }
+    .item {
+        margin: 10px;
     }
 }

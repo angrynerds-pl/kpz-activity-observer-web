@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChange } from '@angular/core';
 
 @Component({
   selector: 'app-user-counter',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserCounterComponent implements OnInit {
 
+  @Input('nrOfUsers') nrOfUsers;
+
   constructor() { }
 
+  ngOnChanges(changes: SimpleChange) {
+    console.log(changes);
+  }
+
   ngOnInit(): void {
+    console.log(this.nrOfUsers);
   }
 
 }
