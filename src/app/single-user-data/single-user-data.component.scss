@@ -1,7 +1,14 @@
 @import "../../assets/scss/variables";
 
 :host {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    width: 100vw;
+    div {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        .item {
+            margin: 15px;
+        }
+    }
 }
