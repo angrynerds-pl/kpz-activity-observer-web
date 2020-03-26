@@ -11,12 +11,8 @@ export class UserCounterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChange) {
-    console.log(changes);
-  }
 
   ngOnInit(): void {
-    console.log(this.nrOfUsers);
   }
 
 }

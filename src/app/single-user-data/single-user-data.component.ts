@@ -39,7 +39,7 @@ export class SingleUserDataComponent implements OnInit {
   private updateGraphs(data) {
     const temp = [];
     data.forEach(element => {
-      temp.push({'name': `${element.url}`,'value':element.timestamps.length});
+      temp.push({'name': `${element.url}`,'value':element.visits});
     });
     this.visitCounter = temp;
   }

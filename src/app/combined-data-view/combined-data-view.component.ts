@@ -11,13 +11,14 @@ export class CombinedDataViewComponent implements OnInit {
 
   constructor(private userService: UsersService) { }
 
+  timePercentage;
   visitCounter;
   userCounter;
 
   ngOnInit(): void {
     this.userService.getAllSites()
       .subscribe(res=> {
-        this.visitCounter = res;
+        this.updateGraphs(res);
       }, err => {
         console.log(err);
       })
@@ -28,4 +29,16 @@ export class CombinedDataViewComponent implements OnInit {
         console.log(err);
       })
   }
+
+  private updateGraphs(res) {
+    const visitCounterTemp = [];
+    const timePercentageTemp = [];
+    res.data.forEach(ele => {
+      visitCounterTemp.push({'name':ele.url, 'value':ele.totalVisits});
+      timePercentageTemp.push({'name':ele.url, 'value':ele.totalTime});
+    })
+    this.visitCounter = visitCounterTemp;
+    this.timePercentage = timePercentageTemp;
+  }
 }
+

@@ -27,6 +27,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { VisitCounterComponent } from './charts/visit-counter/visit-counter.component';
 import { UserCounterComponent } from './charts/user-counter/user-counter.component';
+import { TimePercentageComponent } from './charts/time-percentage/time-percentage.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { UserCounterComponent } from './charts/user-counter/user-counter.compone
     UserListViewComponent,
     UserAccountDetailsComponent,
     VisitCounterComponent,
-    UserCounterComponent
+    UserCounterComponent,
+    TimePercentageComponent
   ],
   imports: [
     BrowserModule,

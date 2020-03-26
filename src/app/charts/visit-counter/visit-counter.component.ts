@@ -17,16 +17,8 @@ export class VisitCounterComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.hasOwnProperty('data')) {
-      if(changes.data.currentValue != null) {
-        if(Array.isArray(changes.data.currentValue)) {
-          this.output = this.data;
-        } else {
-          const temp = [];
-          changes.data.currentValue.data.forEach(ele => {
-            temp.push({'name':ele.url, 'value':ele.occurences.length});
-          })
-          this.output = temp;
-        }
+      if(Array.isArray(changes.data.currentValue)) {
+        this.output = this.data;
       }
     }
   }
@@ -45,6 +37,6 @@ export class VisitCounterComponent implements OnInit {
   legendPosition: string = 'below';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#4c4cff']
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#4c4cff']
   };
 }
