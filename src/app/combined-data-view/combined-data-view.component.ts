@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../users.service';
+import { TransitionCheckState } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-combined-data-view',
@@ -7,65 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CombinedDataViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UsersService) { }
+
+  timePercentage;
+  visitCounter;
+  userCounter;
 
   ngOnInit(): void {
+    this.userService.getAllSites()
+      .subscribe(res=> {
+        this.updateGraphs(res);
+      }, err => {
+        console.log(err);
+      })
+    this.userService.getNumberOfUsers()
+      .subscribe(res =>{
+        this.userCounter = res.data.total;
+      }, err=>{
+        console.log(err);
+      })
   }
-  
-  view: any[] = [380, 250];
 
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Website';
-  showYAxisLabel = true;
-  yAxisLabel = 'Visits';
-  gradient: boolean = true;
-  showLegend: boolean = true;
-  showLabels: boolean = true;
-  isDoughnut: boolean = false;
-  legendPosition: string = 'below';
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-  
-  value: number = 500;
-  units: string = 'Active users';
-
-  data = [
-    {
-      "name": "Youtube",
-      "value": 120
-    },
-    {
-      "name": "Gmail",
-      "value": 30
-    },
-    {
-      "name": "9gag",
-      "value": 50
-    },
-    {
-      "name": "CNN",
-      "value": 15
-    },
-    {
-      "name": "CN",
-      "value": 15
-    },
-    {
-      "name": "NN",
-      "value": 15
-    },
-    {
-      "name": "C",
-      "value": 15
-    },
-    {
-      "name": "CNNn",
-      "value": 15
-    }
-  ];
+  private updateGraphs(res) {
+    const visitCounterTemp = [];
+    const timePercentageTemp = [];
+    res.data.forEach(ele => {
+      visitCounterTemp.push({'name':ele.url, 'value':ele.totalVisits});
+      timePercentageTemp.push({'name':ele.url, 'value':ele.totalTime});
+    })
+    this.visitCounter = visitCounterTemp;
+    this.timePercentage = timePercentageTemp;
+  }
 }
+

@@ -26,6 +26,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { VisitCounterComponent } from './charts/visit-counter/visit-counter.component';
+import { UserCounterComponent } from './charts/user-counter/user-counter.component';
+import { TimePercentageComponent } from './charts/time-percentage/time-percentage.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { VisitCounterComponent } from './charts/visit-counter/visit-counter.comp
     SingleUserDataComponent,
     UserListViewComponent,
     UserAccountDetailsComponent,
-    VisitCounterComponent
+    VisitCounterComponent,
+    UserCounterComponent,
+    TimePercentageComponent
   ],
   imports: [
     BrowserModule,

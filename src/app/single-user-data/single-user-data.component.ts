@@ -17,7 +17,8 @@ export class SingleUserDataComponent implements OnInit {
   name;
   surname;
   
-  visitCounter = [];
+  visitCounter;
+  timePercentage;
 
   @Input() selectedUser: User;
   
@@ -37,10 +38,14 @@ export class SingleUserDataComponent implements OnInit {
   }
 
   private updateGraphs(data) {
-    const temp = [];
+    console.log(data);
+    const visitCounterTemp = [];
+    const timePercentageTemp = [];
     data.forEach(element => {
-      temp.push({'name': `${element.url}`,'value':element.timestamps.length});
+      visitCounterTemp.push({'name': `${element.url}`,'value':element.visits});
+      timePercentageTemp.push({'name': `${element.url}`,'value':element.time});
     });
-    this.visitCounter = temp;
+    this.visitCounter = visitCounterTemp;
+    this.timePercentage = timePercentageTemp;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-visit-counter',
@@ -11,9 +11,18 @@ export class VisitCounterComponent implements OnInit {
   @Input('data') data;
   @Input('name') name;
   @Input('surname') surname;
+  output;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.hasOwnProperty('data')) {
+      if(Array.isArray(changes.data.currentValue)) {
+        this.output = this.data;
+      }
+    }
   }
+
   view: any[] = [600, 400];
 
   showXAxis = true;
@@ -28,6 +37,6 @@ export class VisitCounterComponent implements OnInit {
   legendPosition: string = 'below';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#4c4cff']
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#4c4cff']
   };
 }
