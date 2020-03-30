@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-single-data-view',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleDataViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
   selectedUser;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth.logoutIfExpired();
+  }
 
   select($event) {
     this.selectedUser = $event;

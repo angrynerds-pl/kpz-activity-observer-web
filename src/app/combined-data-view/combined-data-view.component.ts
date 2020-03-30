@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { TransitionCheckState } from '@angular/material/checkbox';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-combined-data-view',
@@ -9,13 +10,14 @@ import { TransitionCheckState } from '@angular/material/checkbox';
 })
 export class CombinedDataViewComponent implements OnInit {
 
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService, private auth: AuthService) { }
 
   timePercentage;
   visitCounter;
   userCounter;
 
   ngOnInit(): void {
+    this.auth.logoutIfExpired();
     this.userService.getAllSites()
       .subscribe(res=> {
         this.updateGraphs(res);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login-view',
@@ -9,11 +10,14 @@ import { AuthService } from '../auth.service';
 })
 export class LoginViewComponent implements OnInit {
   ngOnInit(): void {
-    if(localStorage.getItem('token') || sessionStorage.getItem('token')) {
-      this.router.navigate(['/main/users']);
+    const token = this.auth.getToken();
+    if(token != null) {
+      const jwt = new JwtHelperService();
+      if(!jwt.isTokenExpired(token)) {
+        this.router.navigate(['/main/users']);
+      }
     }
   }
-
 
   title: string = "Activity Observer";
   constructor(private router: Router, private auth: AuthService) { }
