@@ -15,6 +15,8 @@ export class LoginViewComponent implements OnInit {
       const jwt = new JwtHelperService();
       if(!jwt.isTokenExpired(token)) {
         this.router.navigate(['/main/users']);
+      } else {
+        this.auth.logout();
       }
     }
   }

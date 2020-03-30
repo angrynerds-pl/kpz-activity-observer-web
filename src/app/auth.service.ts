@@ -40,7 +40,7 @@ export class AuthService {
     return token;
   }
 
-  checkToken() {
+  refreshToken() {
     const opts = {
       headers: new HttpHeaders({
         'x-auth-token': `${this.getToken()}`
@@ -53,6 +53,21 @@ export class AuthService {
     const jwt = new JwtHelperService();
     if(jwt.isTokenExpired(this.getToken())){
       this.logout();
+    } else {
+      let expirationDate: any = jwt.getTokenExpirationDate(this.getToken());
+      expirationDate = Date.UTC(expirationDate.getUTCFullYear(),expirationDate.getUTCMonth(),expirationDate.getUTCDate(),expirationDate.getUTCHours(),expirationDate.getUTCMinutes(),expirationDate.getUTCSeconds(),expirationDate.getUTCMilliseconds());
+      if(expirationDate-Date.now() < 25000) {
+        this.refreshToken()
+          .subscribe((res:any)=>{
+            if(localStorage.getItem('token')){
+              localStorage.setItem('token', res.data.accessToken);
+            } else {
+              sessionStorage.setItem('token', res.data.accessToken);
+            }
+          },err=> {
+            console.log(err);
+          })
+      }
     }
   }
 
