@@ -38,7 +38,6 @@ export class SingleUserDataComponent implements OnInit {
   }
 
   private updateGraphs(data) {
-    console.log(data);
     const visitCounterTemp = [];
     const timePercentageTemp = [];
     data.forEach(element => {

@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersService } from '../users.service';
+import { AuthService } from '../auth.service';
 
 export interface User {
   number: number;
@@ -30,7 +31,7 @@ export class UserListComponent implements OnInit {
   @Output() selectedUser = new EventEmitter();
   
 
-  constructor(private userService: UsersService) {}
+  constructor(private userService: UsersService,private auth: AuthService) {}
 
   ngOnInit(): void {
     this.userService.getUsers(5,1)
@@ -49,6 +50,7 @@ export class UserListComponent implements OnInit {
 
 
   paginatorChanged($event) {
+    this.auth.logoutIfExpired();
     this.userService.getUsers($event.pageSize,$event.pageIndex+1)
       .subscribe(res=>{
           this.data.length = 0;
@@ -64,6 +66,7 @@ export class UserListComponent implements OnInit {
   }
 
   userChanged() {
+    this.auth.logoutIfExpired();
     this.selectedUser.emit(this.selection.selected[0]);
   }
 

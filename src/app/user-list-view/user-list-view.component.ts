@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list-view',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.auth.logoutIfExpired();
   }
   
 }
