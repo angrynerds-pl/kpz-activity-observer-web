@@ -5,15 +5,19 @@
 </header>
 <div class="mainContainer">
     <div class="formContainer">
-        <div class="errorBox" *ngIf="loginError">{{errorMessage}}</div>
-        <form onsubmit="onLogInClicked()">
+        <form [formGroup]="form">
+            <div *ngIf="form.errors?.invalidCred" class="errorBox">Invalid email and/or password'</div>
+            <div *ngIf="form.errors?.serverUna" class="errorBox">Server unreachable. Please try again later.</div>
+            <div *ngIf="form.errors?.insPerm" class="errorBox">Insufficient permissions.</div>
             <mat-form-field color="accent" appearance="outline">
               <mat-label>Email</mat-label>
-              <input (keyup)="setEmail($event)" matInput placeholder="Ex. pat@example.com" required>
+              <input formControlName="email" matInput placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="form.get('email').errors?.required">Field cannot be empty!</mat-error>
             </mat-form-field>
             <mat-form-field color="accent" appearance="outline">
               <mat-label>Password</mat-label>
-              <input (keyup)="setPassword($event)" class="password" matInput type="password" required>
+              <input formControlName="password" class="password" matInput type="password">
+              <mat-error *ngIf="form.get('email').errors?.required">Field cannot be empty!</mat-error>
             </mat-form-field>
             <mat-slide-toggle (change)="rememberMe()" color="accent">Remember me!</mat-slide-toggle>
         </form>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-view',
@@ -21,28 +22,29 @@ export class LoginViewComponent implements OnInit {
     }
   }
 
+  form = new FormGroup({
+    email: new FormControl('',[
+      Validators.required
+    ]),
+    password: new FormControl('', [
+      Validators.required
+    ])
+  })
+
   title: string = "Activity Observer";
   constructor(private router: Router, private auth: AuthService) { }
 
-  private email: string;
-  private password: string;
   rememberMeIsChecked = false;
-  loginError = false;
-  errorMessage = '';
 
   onLogInClicked() {
-    if(!this.password || !this.email) {
-      this.errorMessage = 'Neither field can be empty';
-      this.loginError = true;
-      return;
-    }
-    const credentials = { email: this.email, password: this.password };
+    const credentials = { email: this.form.get('email').value, password: this.form.get('password').value };
     this.auth.login(credentials)
       .subscribe(res => {
           const isAdmin = this.auth.checkPermissions(res);
           if(!isAdmin) {
-            this.errorMessage = 'Insufficient permissions';
-            this.loginError = true;
+            this.form.setErrors({
+              insPerm: true
+            })
             return;
           }
           if(this.rememberMeIsChecked) {
@@ -54,23 +56,17 @@ export class LoginViewComponent implements OnInit {
         },
         err => {
           if(err.status==404) {
-            this.errorMessage = 'Server unreachable. Please try again later.';
+            this.form.setErrors({
+              serverUna: true
+            })
           } else {
-            this.errorMessage = 'Invalid email and/or password';
+            this.form.setErrors({
+              invalidCred: true
+            })
           }
-          this.loginError = true;
         }
       );
   }
-
-  setEmail($event) {
-    this.email = $event.target.value;
-  }
-
-  setPassword($event) {
-    this.password = $event.target.value;
-  }
-
   rememberMe() {
     this.rememberMeIsChecked = !this.rememberMeIsChecked;
   }

@@ -28,6 +28,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { VisitCounterComponent } from './charts/visit-counter/visit-counter.component';
 import { UserCounterComponent } from './charts/user-counter/user-counter.component';
 import { TimePercentageComponent } from './charts/time-percentage/time-percentage.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import { TimePercentageComponent } from './charts/time-percentage/time-percentag
     NgxChartsModule,
     HttpClientModule,
     MatSlideToggleModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
